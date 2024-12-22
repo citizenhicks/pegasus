@@ -88,7 +88,7 @@ Financial analysts frequently work with large, unstructured documents (PDFs, Wor
 
 1. **Clone the Repository**:
 ```bash
-git clone https://github.com/your-username/pegasus.git
+git clone https://github.com/Arrabonae/pegasus.git
 cd pegasus
 ```
 
