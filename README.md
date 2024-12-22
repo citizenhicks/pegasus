@@ -87,10 +87,10 @@ Financial analysts frequently work with large, unstructured documents (PDFs, Wor
 ### Server Setup (Python)
 
 1. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/your-username/pegasus.git
-   cd pegasus
-   ```
+```bash
+git clone https://github.com/your-username/pegasus.git
+cd pegasus
+```
 
 2. **Create & Activate a Virtual Environment (optional but recommended):**
 ``` bash
@@ -128,17 +128,17 @@ Running the Application
 The UI communicates with the backend at http://localhost:5050.
 
 ## Usage
-	1.	Create a New Thread
-	•	Click “New Thread” in the sidebar.
-	•	Upload a PDF/DOC/DOCX file, provide a descriptive title, and start indexing.
-	2.	Add Additional Files
-	•	In the right-hand “Files” tab, use the paperclip icon to upload more files to the current session.
-	3.	Chat with the AI
-	•	Use the chat box at the bottom-right corner to ask questions.
-	•	The AI retrieves relevant pages from your indexed documents, providing answers with references.
-	4.	Generate a Report
-	•	In the main “Report” panel, click “Generate Report.”
-	•	A multi-section report (executive summary, key metrics, detailed analysis, trends, and conclusions) is compiled by the vision + text LLM pipeline.
+1. Create a New Thread
+	* Click “New Thread” in the sidebar.
+	* Upload a PDF/DOC/DOCX file, provide a descriptive title, and start indexing.
+2. Add Additional Files
+	* In the right-hand “Files” tab, use the paperclip icon to upload more files to the current session.
+3. Chat with the AI
+	* Use the chat box at the bottom-right corner to ask questions.
+	* The AI retrieves relevant pages from your indexed documents, providing answers with references.
+4. Generate a Report
+	* In the main “Report” panel, click “Generate Report.”
+	* A multi-section report (executive summary, key metrics, detailed analysis, trends, and conclusions) is compiled by the vision + text LLM pipeline.
 
 ## Contribution Guide
 
