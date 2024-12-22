@@ -171,4 +171,4 @@ Below are some prioritized enhancements the team is looking to implement:
 	* Provide an interface for “edit suggestions” that automatically merges user edits into the final text.
 
 ## License
-This project is licensed under the MIT License.
+This project is licensed under the APACHE LICENSE, VERSION 2.0.
