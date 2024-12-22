@@ -9,7 +9,6 @@ Pegasus is an AI-driven financial analysis platform designed to streamline docum
 - [Background](#background)
 - [Features](#features)
 - [Tech Stack](#tech-stack)
-- [Project Structure](#project-structure)
 - [Installation](#installation)
   - [Prerequisites](#prerequisites)
   - [Server Setup (Python)](#server-setup-python)
@@ -17,7 +16,7 @@ Pegasus is an AI-driven financial analysis platform designed to streamline docum
   - [Running the Application](#running-the-application)
 - [Usage](#usage)
 - [Contribution Guide](#contribution-guide)
-- [Outstanding Improvements](#outstanding-improvements)
+- [Future Improvements](#future-improvements)
 - [License](#license)
 
 ---
@@ -74,44 +73,12 @@ Financial analysts frequently work with large, unstructured documents (PDFs, Wor
   - React Markdown / Showdown for Markdown rendering  
   - Plotly.js / Chart.js for prospective data visualization  
 
----
-
-## Project Structure
-
-Below is a brief overview of the folder structure:
-
-pegasus/
-├── server/                        # Python/FastAPI server code
-│   ├── config.py
-│   ├── converters.py
-│   ├── indexer.py
-│   ├── logger.py
-│   ├── main.py                    # FastAPI entry point
-│   ├── model_loader.py
-│   ├── responder.py
-│   └── retriever.py
-├── src/                           # Next.js/React client code (UI)
-│   ├── app/                       # Next.js app directory
-│   ├── components/                # Reusable UI components
-│   ├── hooks/                     # Custom React hooks
-│   └── lib/                       # Utility functions
-├── static/                        # Static files (e.g., images)
-├── package.json                   # Node.js dependencies
-├── pyproject.toml                 # Python dependencies & project metadata
-├── requirements.txt               # (optional) Traditional Python deps
-├── tailwind.config.ts             # Tailwind config
-├── postcss.config.mjs             # PostCSS config
-├── next.config.mjs                # Next.js config in ESM
-├── next.config.js                 # Next.js config in CJS
-└── README.md                      # Project README
-
----
 
 ## Installation
 
 ### Prerequisites
 
-1. **Python 3.11** (the code specifically targets 3.11)  
+1. **Python 3.11 and uv** (the code specifically targets 3.11)  
 2. **Node.js & npm** (latest LTS recommended, e.g., Node 18+)  
 3. **Git**  
 
@@ -123,53 +90,44 @@ pegasus/
    ```bash
    git clone https://github.com/your-username/pegasus.git
    cd pegasus
+   ```
 
-	2.	Create & Activate a Virtual Environment (optional but recommended):
-
-python3.11 -m venv venv
+2. **Create & Activate a Virtual Environment (optional but recommended):**
+``` bash
+uv venv
 source venv/bin/activate  # On Mac/Linux
-# On Windows:
-# venv\Scripts\activate
+```
 
+3. **Install Python Dependencies:**
+```bash
+uv pip install -r requirements.txt
+```
 
-	3.	Install Python Dependencies:
-
-# Option 1: Using pyproject.toml with pip >= 23.1
-pip install .
-
-# or Option 2: Using requirements.txt
-pip install -r requirements.txt
-
-
-	4.	Run the Server:
-
+4. **Run the Server:**
+```bash
 uvicorn server.main:app --host 0.0.0.0 --port 5050 --reload
-
+```
 The server will be available at http://localhost:5050.
 
-UI Setup (Next.js)
-	1.	Install Node Dependencies:
-
+### UI Setup (Next.js)
+1. **Install Node Dependencies:**
+```bash
 npm install
-# or
-yarn install
+```
 
-
-	2.	Run the Development Server:
-
+2. **Run the Development Server:**
+```bash
 npm run dev
-# or
-yarn dev
-
+```
 The UI will be running on http://localhost:3000.
 
 Running the Application
-	1.	Start the Python (FastAPI) Server on port 5050.
-	2.	Start the Next.js Dev Server on port 3000.
-	3.	In your browser, navigate to http://localhost:3000.
+1. Start the Python (FastAPI) Server on port 5050.
+2. Start the Next.js Dev Server on port 3000.
+3. In your browser, navigate to http://localhost:3000.
 The UI communicates with the backend at http://localhost:5050.
 
-Usage
+## Usage
 	1.	Create a New Thread
 	•	Click “New Thread” in the sidebar.
 	•	Upload a PDF/DOC/DOCX file, provide a descriptive title, and start indexing.
@@ -182,7 +140,7 @@ Usage
 	•	In the main “Report” panel, click “Generate Report.”
 	•	A multi-section report (executive summary, key metrics, detailed analysis, trends, and conclusions) is compiled by the vision + text LLM pipeline.
 
-Contribution Guide
+## Contribution Guide
 
 We welcome your contributions and feedback! Here’s how you can get involved:
 	1.	Fork the repository and clone to your local machine.
@@ -190,30 +148,27 @@ We welcome your contributions and feedback! Here’s how you can get involved:
 
 git checkout -b feature/your-feature
 
-
 	3.	Commit your changes with clear messages:
 
 git commit -m "Add awesome feature"
-
 
 	4.	Push to your fork and create a Pull Request from GitHub.
 
 We encourage discussions around project architecture, code style, or new features. Feel free to open an issue or start a GitHub Discussion.
 
-Outstanding Improvements
+## Future Improvements
 
 Below are some prioritized enhancements the team is looking to implement:
-	1.	Implementation of Charts
-	•	Integrate dynamic charts for financial metrics using Plotly.js or Chart.js, enabling real-time visual analytics in the UI.
-	2.	Implementation of Experimental Features
-	•	Enable advanced or less-tested functionality behind feature flags.
-	•	Expand the “Experimental” toggle to unlock new UI interactions or server endpoints.
-	3.	Implementation of Yahoo Finance Features
-	•	Integrate external financial data from Yahoo Finance, merging real-time market data with user-provided documents.
-	4.	Implementation of User-Directed Report Changes
-	•	Allow users to manually amend or annotate the AI-generated final report.
-	•	Provide an interface for “edit suggestions” that automatically merges user edits into the final text.
+1. Implementation of Charts
+    * Integrate dynamic charts for financial metrics using Plotly.js or Chart.js, enabling real-time visual analytics in the UI.
+2. Implementation of Experimental Features
+    * Enable advanced or less-tested functionality behind feature flags.
+	* Expand the “Experimental” toggle to unlock new UI interactions or server endpoints.
+3. Implementation of Yahoo Finance Features
+	* Integrate external financial data from Yahoo Finance, merging real-time market data with user-provided documents.
+4. Implementation of User-Directed Report Changes
+	* Allow users to manually amend or annotate the AI-generated final report.
+	* Provide an interface for “edit suggestions” that automatically merges user edits into the final text.
 
-License
-
+## License
 This project is licensed under the MIT License.
