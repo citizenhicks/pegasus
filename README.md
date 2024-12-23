@@ -121,7 +121,7 @@ npm run dev
 ```
 The UI will be running on http://localhost:3000.
 
-Running the Application
+### Running the Application
 1. Start the Python (FastAPI) Server on port 5050.
 2. Start the Next.js Dev Server on port 3000.
 3. In your browser, navigate to http://localhost:3000.
@@ -171,4 +171,4 @@ Below are some prioritized enhancements the team is looking to implement:
 	* Provide an interface for “edit suggestions” that automatically merges user edits into the final text.
 
 ## License
-This project is licensed under the MIT License.
+This project is licensed under the APACHE LICENSE, VERSION 2.0.
