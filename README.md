@@ -20,6 +20,7 @@ Pegasus is an AI-driven financial analysis platform designed to streamline docum
 - [License](#license)
 
 ---
+![Pegasus Image](assets/pegasus.png)
 
 ## Background
 
