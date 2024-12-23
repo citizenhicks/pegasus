@@ -25,7 +25,7 @@ Pegasus is an AI-driven financial analysis platform designed to streamline docum
 
 Financial analysts frequently work with large, unstructured documents (PDFs, Word documents, etc.) and spend significant time extracting key metrics and commentary to produce financial reports. **Pegasus** automates and augments this process by:
 
-1. Indexing documents (supporting PDF, DOC, DOCX) for quick retrieval.  
+1. Indexing documents (supporting PDF, DOC, DOCX) for quick retrieval. This uses the ColPali pipeline for all kinds of documents.    
 2. Generating chunk-based summaries for multi-page files using a vision-language model (Qwen2-VL).  
 3. Creating a final, multi-section financial analysis report with minimal user input.  
 4. Offering a user-friendly chat interface to query the ingested documents and retrieve relevant context.
@@ -143,16 +143,16 @@ The UI communicates with the backend at http://localhost:5050.
 ## Contribution Guide
 
 We welcome your contributions and feedback! Here’s how you can get involved:
-	1.	Fork the repository and clone to your local machine.
-	2.	Create a new branch for your feature or bug fix:
-
+1. Fork the repository and clone to your local machine.
+2. Create a new branch for your feature or bug fix:
+```bash
 git checkout -b feature/your-feature
-
-	3.	Commit your changes with clear messages:
-
+```
+3. Commit your changes with clear messages:
+```bash
 git commit -m "Add awesome feature"
-
-	4.	Push to your fork and create a Pull Request from GitHub.
+```
+4. Push to your fork and create a Pull Request from GitHub.
 
 We encourage discussions around project architecture, code style, or new features. Feel free to open an issue or start a GitHub Discussion.
 

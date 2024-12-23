@@ -96,8 +96,19 @@ export function AppSidebar({
                 <div className="flex items-center justify-between p-4 cursor-pointer">
                   {/* Thread Title and Info */}
                   <div>
-                    <span className="font-semibold text-lg text-[var(--text)]">
-                      {session.title || "Untitled"}
+                    <span   
+                    className="
+                      font-semibold 
+                      text-lg 
+                      text-[var(--text)] 
+                      max-w-full 
+                      whitespace-nowrap 
+                      overflow-hidden 
+                      text-ellipsis
+                      block
+                      "
+                      title={session.title || "Untitled"}>
+                    {session.title || "Untitled"}
                     </span>
                     <div className="text-sm text-[var(--text)] ">
                       {format(new Date(session.created_at), "M/d/yy h:mma")} -{" "}
