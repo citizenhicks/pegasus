@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/tooltip"
 import { ViewVerticalIcon } from "@radix-ui/react-icons"
 import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
+import { PanelLeftDashed } from "lucide-react"
 
 
 const SIDEBAR_COOKIE_NAME = "sidebar:state"
@@ -277,14 +278,16 @@ const SidebarTrigger = React.forwardRef<
       data-sidebar="trigger"
       variant="ghost"
       size="icon"
-      className={cn("h-7 w-7", className)}
+      className={className}
       onClick={(event) => {
         onClick?.(event)
         toggleSidebar()
       }}
       {...props}
     >
-      <ViewVerticalIcon />
+      <strong>
+      <PanelLeftDashed />
+      </strong>
       <span className="sr-only">Toggle Sidebar</span>
     </Button>
   )

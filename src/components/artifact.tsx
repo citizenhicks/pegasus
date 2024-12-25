@@ -140,8 +140,8 @@ export function Artifact({ content, title, sessionId, onActiveThreadChange, onRe
   };
 
   return (
-    <div className="bg-[hsl(var(--muted))] rounded overflow-hidden border border-[hsl(var(--ring))] flex flex-col h-full">
-      <div className="bg-[hsl(var(--muted))] border-b border-[hsl(var(--ring))] p-2 flex justify-between items-center relative">
+    <div className="bg-[hsl(var(--background))] rounded overflow-hidden border border-[hsl(var(--border))] flex flex-col h-full focus:ring-0 ">
+      <div className="bg-[hsl(var(--background))] border-b border-[hsl(var(--border))] rounded p-2 flex justify-between items-center relative">
         <div className="flex items-center space-x-4">
           {sessionId && (
             <Button
@@ -171,16 +171,16 @@ export function Artifact({ content, title, sessionId, onActiveThreadChange, onRe
         </div>
         <div className="flex items-center space-x-2">
           <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as 'raw' | 'pretty')}>
-            <TabsList className="bg-[hsl(var(--popover))]  border border-[hsl(var(--ring))] rounded">
+            <TabsList className="bg-[hsl(var(--popover))]  border border-[hsl(var(--border))] rounded">
               <TabsTrigger 
                 value="raw" 
-                className="data-[state=active]:bg-[hsl(var(--primary))] data-[state=active]:text-[hsl(var(--foreground))]  text-[hsl(var(--foreground))]"
+                className="data-[state=active]:bg-[hsl(var(--primary))] data-[state=active]:text-[hsl(var(--foreground))]  text-[hsl(var(--foreground))] hover:bg-[hsl(var(--primary-hover))]  rounded"
               >
                 Raw
               </TabsTrigger>
               <TabsTrigger 
                 value="pretty" 
-                className="data-[state=active]:bg-[hsl(var(--primary))]  data-[state=active]:text-[hsl(var(--foreground))] text-[hsl(var(--foreground))]"
+                className="data-[state=active]:bg-[hsl(var(--primary))]  data-[state=active]:text-[hsl(var(--foreground))] text-[hsl(var(--foreground))] hover:bg-[hsl(var(--primary-hover))] rounded"
               >
                 Pretty
               </TabsTrigger>

@@ -51,7 +51,7 @@ export function AppSidebar({
   };
 
   return (
-    <Sidebar className="h-screen bg-[var(--background)] border-r border-[hsl(var(--ring))] text-[var(--text)] flex flex-col">
+    <Sidebar className="h-screen bg-[var(--background)] border-r border-[hsl(var(--border))] text-[hsl(var(--foreground))] flex flex-col">
       {/* Sidebar Header */}
       <SidebarHeader className="p-5 bg-[var(--background)]">
         <h2 className="text-lg font-bold flex justify-center">Threads</h2>
@@ -71,14 +71,14 @@ export function AppSidebar({
             variant="outline"
             size="icon"
             title="Refresh Threads"
-            className="w-auto bg-[hsl(var(--sidebar-background))] hover:bg-[hsl(var(--sidebar-ring))] text-[hsl(var(--sidebar-primary))] border border-[hsl(var(--sidebar-border))] p-2 rounded"
+            className="w-auto bg-[hsl(var(--background))] hover:bg-[hsl(var(--muted))] border border-[hsl(var(--border))] text-[hsl(var(--primary))] p-2 rounded"
             aria-label="Refresh Threads"
           >
-            <RotateCcw className="h-5 w-5" />
+            <RotateCcw />
           </Button>
         </div>
       </SidebarHeader>
-      <SidebarSeparator />
+      <SidebarSeparator  className="border-b border-[hsl(var(--border))] rounded"/>
       {/* Sidebar Content */}
       <SidebarContent className="flex-1 overflow-y-auto bg-[hsl(var(--background))] [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-[hsl(var(--muted))] [&:hover]:scrollbar-thumb-[hsl(var(--muted-foreground))]">
         <SidebarMenu className="mt-4 px-2">
@@ -89,8 +89,8 @@ export function AppSidebar({
                 asChild
                 isActive={activeThread === session.id}
                 onClick={() => setActiveThread(session.id)}
-                className="bg-[hsl(var(--sidebar-background))] hover:bg-[hsl(var(--primary-hover))] text-[hsl(var(--foreground))] p-1 my-1 rounded"
-                variant="outline"
+                className="bg-[hsl(var(--sidebar-background))] hover:bg-[hsl(var(--primary-hover))] text-[hsl(var(--foreground))] border border-[hsl(var(--border))] p-1 my-1 rounded"
+                variant="default"
                 size="lg"
               >
                 <div className="flex items-center justify-between p-4 cursor-pointer">
@@ -99,8 +99,8 @@ export function AppSidebar({
                     <span   
                     className="
                       font-semibold 
-                      text-lg 
-                      text-[var(--text)] 
+                      text-sm
+                      text-[hsl(var(--foreground))] 
                       max-w-full 
                       whitespace-nowrap 
                       overflow-hidden 
@@ -110,7 +110,7 @@ export function AppSidebar({
                       title={session.title || "Untitled"}>
                     {session.title || "Untitled"}
                     </span>
-                    <div className="text-sm text-[var(--text)] ">
+                    <div className="text-xs text-[hsl(var(--foreground))] ">
                       {format(new Date(session.created_at), "M/d/yy h:mma")} -{" "}
                       {session.files.length} {session.files.length === 1 ? "file" : "files"}
                     </div>
@@ -121,15 +121,15 @@ export function AppSidebar({
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
                         <button className="ml-2 hover:bg-[var(--background)] rounded" aria-label="Actions">
-                          <MoreHorizontal className="h-4 w-4 text-[var(--text)]" />
+                          <MoreHorizontal className="h-4 w-4 text-[hsl(var(--foreground))]" />
                         </button>
                       </DropdownMenuTrigger>
-                      <DropdownMenuContent className="w-[--radix-popper-anchor-width] bg-[hsl(var(--muted))] border border-[hsl(var(--ring))]">
+                      <DropdownMenuContent className="w-[--radix-popper-anchor-width] bg-[hsl(var(--muted))] border border-[hsl(var(--border))]">
                         <DropdownMenuItem
                           onSelect={() => onEditThread(session.id, session.title || "Untitled")} 
                           className="flex items-center cursor-pointer"
                         >
-                          <Edit className="mr-2 h-4 w-4 text-[var(--text)]" />
+                          <Edit className="mr-2 h-4 w-4 text-[hsl(var(--foreground))]" />
                           Edit title
                         </DropdownMenuItem>
                         <DropdownMenuItem

@@ -35,10 +35,10 @@ export function DocumentGrid({ files, onFileClick }: DocumentGridProps) {
     return `${Math.round(bytes / Math.pow(1024, i))} ${sizes[i]}`;
   };
 
-  return (
+  return (  
     <div className="w-full">
       <table className="w-full">
-        <thead className="bg-[hsl(var(--popover))]  border-b border-[hsl(var(--ring))]">
+        <thead className="bg-[hsl(var(--popover))]  border-b border-[hsl(var(--border))]">
           <tr>
             <th className="px-4 py-2 text-left text-xs font-medium text-[hsl(var(--foreground))] uppercase max-w-[200px]">
               Name
@@ -48,11 +48,11 @@ export function DocumentGrid({ files, onFileClick }: DocumentGridProps) {
             </th>
           </tr>
         </thead>
-        <tbody className="bg-[hsl(var(--muted))]">
+        <tbody className="bg-[hsl(var(--background))]">
           {Array.isArray(files) && files.map((file) => (
             <tr
               key={`${file.session_id}-${file.name}`}
-              className="border-t border-[hsl(var(--ring))] cursor-pointer hover:bg-[hsl(var(--popover))] transition-colors"
+              className="border-t border-[hsl(var(--border))] cursor-pointer hover:bg-[hsl(var(--primary-hover))] transition-colors"
               onClick={() => handleFileClick(file)}
             >
               <td className="px-4 py-2 text-sm text-[hsl(var(--foreground))] truncate max-w-[200px]">

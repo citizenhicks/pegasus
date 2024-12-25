@@ -1,7 +1,7 @@
 // src/components/PegasusApp.jsx
 
 'use client';
-
+import { Resizable } from "re-resizable";
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { 
   Settings, 
@@ -44,12 +44,12 @@ import { Switch } from "@/components/ui/switch";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useDropzone } from 'react-dropzone';
-import { Artifact } from "@/components/ui/artifact";
+import { Artifact } from "@/components/artifact";
 import Image from 'next/image';
 import { DocumentGrid } from '@/components/document-grid';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger, DropdownMenuCheckboxItem } from '@/components/ui/dropdown-menu';
 import { SidebarProvider, SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
-import { AppSidebar } from "@/components/ui/appSidebar";
+import { AppSidebar } from "@/components/appSidebar";
 
 
 const API_BASE_URL = 'http://localhost:5050';
@@ -129,7 +129,6 @@ export function PegasusApp() {
   const chatContainerRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const chatResizeBarRef = useRef<HTMLDivElement>(null);
-  const [chatHeight, setChatHeight] = useState(500);
 
   // State variables for editing thread title
   const [editDialogOpen, setEditDialogOpen] = useState<boolean>(false);
@@ -315,7 +314,7 @@ export function PegasusApp() {
           message.role === 'system' 
             ? 'bg-red-500 text-[hsl(var(--foreground))]' 
             : message.role === 'user' 
-              ? 'bg-[hsl(var(--muted))] text-[hsl(var(--foreground))] border border-[hsl(var(--ring))]' 
+              ? 'bg-[hsl(var(--muted))] text-[hsl(var(--foreground))] border border-[hsl(var(--border))]' 
               : 'bg-[hsl(var(--primary))] text-[hsl(var(--foreground))]'
         } rounded px-4 py-2`}>
           <p className="text-sm">{message.content}</p>
@@ -337,26 +336,6 @@ export function PegasusApp() {
     );
   };
 
-  const handleChatMouseDown = (e: React.MouseEvent) => {
-    e.preventDefault();
-    document.addEventListener('mousemove', handleChatMouseMove);
-    document.addEventListener('mouseup', handleChatMouseUp);
-  };
-
-  const handleChatMouseMove = (e: MouseEvent) => {
-    if (chatResizeBarRef.current) {
-      const containerRect = chatResizeBarRef.current.parentElement?.getBoundingClientRect();
-      if (containerRect) {
-        const newHeight = containerRect.bottom - e.clientY;
-        setChatHeight(newHeight);
-      }
-    }
-  };
-
-  const handleChatMouseUp = () => {
-    document.removeEventListener('mousemove', handleChatMouseMove);
-    document.removeEventListener('mouseup', handleChatMouseUp);
-  };
 
   async function loadHistoryAndUpdate() { 
     try {
@@ -1024,13 +1003,13 @@ export function PegasusApp() {
             {/* Main content */}
             <div className="flex-1 flex flex-col">
               {/* Header */}
-              <header className="bg-[hsl(var(--muted))] border-b border-[hsl(var(--ring))] p-4 flex justify-between items-center">
+              <header className="bg-[hsl(var(--background))] border-b border-[hsl(var(--border))] rounded p-4 flex justify-between items-center">
                 <div className="flex items-center">
                   {/* Sidebar toggle button can be uncommented if needed */}
                   <SidebarTrigger 
                     variant="outline"
                     size="icon" 
-                    className="bg-[hsl(var(--primary))] hover:bg-[hsl(var(--primary-hover))] text-[hsl(var(--primary-foreground))] h-9 w-9 rounded" />
+                    className="w-auto bg-[hsl(var(--background))] hover:bg-[hsl(var(--muted))] border border-[hsl(var(--border))] text-[hsl(var(--primary))] p-2 rounded" />
                   {/* <Button 
                     variant="outline" 
                     size="icon" 
@@ -1053,11 +1032,11 @@ export function PegasusApp() {
                 </div>
                 <div className="w-10"></div> {/* Spacer */}
                 <div className="flex items-center space-x-2">
-                  <Button variant="outline" size="icon" className="bg-[hsl(var(--primary))] hover:bg-[hsl(var(--primary-hover))] text-[hsl(var(--primary-foreground))] p-2 rounded" onClick={() => setIsSettingsOpen(true)}>
+                  <Button variant="outline" size="icon" className="w-auto bg-[hsl(var(--background))] hover:bg-[hsl(var(--muted))] border border-[hsl(var(--border))] text-[hsl(var(--primary))] p-2 rounded" onClick={() => setIsSettingsOpen(true)}>
                     <Settings />
                   </Button>
-                  <Button variant="outline" size="icon" className="bg-[hsl(var(--primary))] hover:bg-[hsl(var(--primary-hover))] text-[hsl(var(--primary-foreground))] p-2 rounded" onClick={handleToggle} disabled>
-                    {isDarkMode ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+                  <Button variant="outline" size="icon" className="w-auto bg-[hsl(var(--background))] hover:bg-[hsl(var(--muted))] border border-[hsl(var(--border))] text-[hsl(var(--primary))] p-2 rounded" onClick={handleToggle} disabled>
+                    {isDarkMode ? <Sun /> : <Moon />}
                   </Button>
                 </div>
               </header>
@@ -1085,14 +1064,32 @@ export function PegasusApp() {
                   )}
                 </div>
 
-                {/* Right sidebar */}
+                {/* Right side */}
+
                 <div className="w-1/3 h-full flex flex-col">
+                  <Resizable
+                    defaultSize={{ width: "100%", height: "30%" }}
+
+                  enable={{
+                    right: false,
+                    top: false,
+                    bottom: true,
+                    left: false,
+                    topRight: false,
+                    bottomRight: false,
+                    bottomLeft: false,
+                    topLeft: false,
+                  }}
+                  className="overflow-hidden rounded"
+                  style={{ display: "flex", flexDirection: "row", }}
+
+                  >
                   {/* Tabs section */}
-                  <div style={{ height: `calc(100% - ${chatHeight}px - 8px)` }} className="bg-[hsl(var(--muted))] border border-[hsl(var(--ring))] rounded overflow-hidden">
+                  <div className="bg-[hsl(var(--background))] border border-[hsl(var(--border))] rounded overflow-hidden w-full">
                     {activeThread ? (
                       <Tabs defaultValue="files" className="h-full flex flex-col">
-                        <div className="bg-[hsl(var(--muted))] border-b border-[hsl(var(--ring))] p-2 flex justify-between items-center">
-                          <TabsList className="bg-[hsl(var(--popover))]  border border-[hsl(var(--ring))] rounded">
+                        <div className="bg-[hsl(var(--background))] border-b border-[hsl(var(--border))] p-2 flex justify-between items-center rounded">
+                          <TabsList className="bg-[hsl(var(--popover))]  border border-[hsl(var(--border))] rounded">
                             <TabsTrigger 
                               value="files" 
                               className="data-[state=active]:bg-[hsl(var(--primary))] hover:bg-[hsl(var(--primary-hover))] text-[hsl(var(--primary-foreground))] rounded"
@@ -1129,9 +1126,9 @@ export function PegasusApp() {
                               fileInputRef.current?.click();
                               //addNotification('Select a file to upload', 'info');
                             }}
-                            className="bg-[hsl(var(--primary))] hover:bg-[hsl(var(--primary-hover))] text-[hsl(var(--primary-foreground))] p-2 rounded"
+                            className="w-auto bg-[hsl(var(--background))] hover:bg-[hsl(var(--muted))] border border-[hsl(var(--border))] text-[hsl(var(--primary))] p-2 rounded"
                           >
-                            <Paperclip className="h-4 w-4" />
+                            <Paperclip />
                           </Button>
                           <input
                             type="file"
@@ -1169,17 +1166,11 @@ export function PegasusApp() {
                       </div>
                     )}
                   </div>
-
-                  {/* Chat resize bar */}
-                  <div
-                    ref={chatResizeBarRef}
-                    className="h-2 bg-[hsl(var(--muted))] rounded  transition-colors duration-200"
-                    onMouseDown={handleChatMouseDown}
-                    //onClick={() => addNotification('Adjusting chat size', 'info')}
-                  ></div>
-
+                  
+                  </Resizable>
                   {/* Chat */}
-                  <div style={{ height: `${chatHeight}px` }} className="bg-[hsl(var(--muted))] border border-[hsl(var(--ring))] rounded p-4 flex flex-col overflow-hidden">
+                  <div className="h-2"></div>
+                  <div className="h-full bg-[hsl(var(--background))] border border-[hsl(var(--border))] rounded p-4 flex flex-col overflow-hidden">
                     {activeThread ? (
                       <>
                         <div className="flex justify-between items-center mb-2">
@@ -1202,10 +1193,10 @@ export function PegasusApp() {
                                 handleSendMessage(inputMessage);
                               }
                             }}
-                            className="bg-[hsl(var(--muted))] text-[hsl(var(--foreground))] placeholder-[hsl(var(--muted-foreground))] border border-[hsl(var(--ring))] rounded"
+                            className="bg-[hsl(var(--muted))] text-[hsl(var(--foreground))] placeholder-[hsl(var(--muted-foreground))] border border-[hsl(var(--border))] rounded"
                           />
-                          <Button size="icon" variant="outline" onClick={() => handleSendMessage(inputMessage)} className="bg-[hsl(var(--primary))] hover:bg-[hsl(var(--primary-hover))] text-[hsl(var(--primary-foreground))] p-2 rounded">
-                            <Send className="h-4 w-4" />
+                          <Button size="icon" variant="outline" onClick={() => handleSendMessage(inputMessage)} className="w-auto bg-[hsl(var(--background))] hover:bg-[hsl(var(--muted))] border border-[hsl(var(--border))] text-[hsl(var(--primary))] p-2 rounded">
+                            <Send/>
                           </Button>
                         </div>
                       </>
@@ -1220,10 +1211,15 @@ export function PegasusApp() {
                     )}
                   </div>
                 </div>
+                
               </div>
+              
             </div>
+            
           </div>
+          
         </SidebarInset>
+        
       </SidebarProvider>
   );
 }

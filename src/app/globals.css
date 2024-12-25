@@ -34,7 +34,8 @@ body {
     --destructive-foreground: 210 20% 98%;
     --border: 220 13% 91%;
     --input: 220 13% 91%;
-    --ring: 263.4 70% 50.4%; /* Violet ring color */
+    --ring: 263.4 70% 50.4%; 
+    --radius: 0.4rem;
     
     /* Sidebar specific colors */
     --sidebar-background: 240 100% 98%; /* Match main background */
@@ -67,7 +68,8 @@ body {
     --destructive-foreground: 210 20% 98%;
     --border: 215 27.9% 16.9%;
     --input: 215 27.9% 16.9%;
-    --ring: 263.4 40% 60%; /* Violet ring */
+    --ring: 263.4 40% 60%; 
+    --radius: 0.4rem;
 
     /* Sidebar specific colors */
     --sidebar-background: 240 10% 3.9%;
